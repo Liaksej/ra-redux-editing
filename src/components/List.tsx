@@ -1,19 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
-import { AppState, ProductState } from "@/redux/state";
+import { AppState, Product } from "@/redux/state";
 import { ActionTypes } from "@/redux/action";
 
 export function List() {
   const listState = useSelector((state: AppState) => state.list);
   const dispatch = useDispatch();
 
-  function editHandler(item: ProductState) {
-    console.log("Я сработал");
-    return dispatch({ type: ActionTypes.EXTRACT_TO_FORM, payload: item });
+  function editHandler(item: Product) {
+    return dispatch({ type: ActionTypes.EXTRACT_TO_FORM, payload: item.id });
+  }
+
+  if (listState.products.length < 1) {
+    return null;
   }
 
   return (
     <ul className="w-full">
-      {listState.map((item) => (
+      {listState.products.map((item: Product) => (
         <li className="list-disc" key={item.id}>
           <span>{item.name}</span> - <span>{String(item.price)}</span>
           <button

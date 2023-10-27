@@ -1,4 +1,4 @@
-import { ProductState } from "@/redux/state";
+import { Product, ProductState } from "@/redux/state";
 
 export enum ActionTypes {
   ADD = "add",
@@ -10,22 +10,22 @@ export enum ActionTypes {
 
 export interface AddAction {
   type: ActionTypes.ADD;
-  payload: ProductState;
+  payload: Product;
 }
 
 export interface RemoveAction {
   type: ActionTypes.REMOVE;
-  payload: Pick<ProductState, "id">;
+  payload: Pick<Product, "id">;
 }
 
 export interface EditAction {
   type: ActionTypes.EDIT;
-  payload: ProductState;
+  payload: Product;
 }
 
 export interface ExtractToFormAction {
   type: ActionTypes.EXTRACT_TO_FORM;
-  payload: ProductState;
+  payload: Pick<ProductState, "editId">;
 }
 
 export interface ClearFormAction {
