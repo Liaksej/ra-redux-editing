@@ -50,13 +50,13 @@ export function Form() {
 
   return (
     <form
-      className={`w-fit flex p-2 items-center gap-4 rounded-xl ${
+      className={`w-full flex p-2 justify-between items-center gap-4 rounded-xl ${
         Boolean(state.editId) && "bg-yellow-500"
       }`}
       onSubmit={(e) => submitHandler(e)}
     >
       <input
-        className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+        className="w-2/3 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
         name="name"
         ref={nameInput}
         placeholder="Введите название"
@@ -64,7 +64,7 @@ export function Form() {
         required
       />
       <input
-        className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+        className="w-1/4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
         name="price"
         ref={priceInput}
         placeholder="Введите цену"

@@ -1,6 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppState, Product } from "@/redux/state";
 import { ActionTypes } from "@/redux/action";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export function List() {
   const listState = useSelector((state: AppState) => state.list);
@@ -15,28 +25,55 @@ export function List() {
   }
 
   return (
-    <ul className="w-full">
-      {listState.products.map((item: Product) => (
-        <li className="list-disc" key={item.id}>
-          <span>{item.name}</span> - <span>{String(item.price)}</span>
-          <button
-            type="button"
-            onClick={() => editHandler(item)}
-            className="ml-2 bg-yellow-500 hover:bg-green-600 text-white px-2 rounded-md transition duration-300"
-          >
-            I
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              dispatch({ type: ActionTypes.REMOVE, payload: { id: item.id } });
-            }}
-            className="ml-2 bg-red-500 hover:bg-red-600 text-white px-1 rounded-md transition duration-300"
-          >
-            X
-          </button>
-        </li>
-      ))}
-    </ul>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-2/3 text-left">Название</TableHead>
+          <TableHead className="w-1/4">Цена</TableHead>
+          <TableHead className="text-right">Действия</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {listState.products.map((item: Product) => (
+          <TableRow key={item.id}>
+            <TableCell className="w-2/3 overflow-auto">{item.name}</TableCell>
+            <TableCell>{String(item.price)}</TableCell>
+            <TableCell className="text-center flex gap-0.5">
+              <Button
+                variant="outline"
+                size="icon"
+                type="button"
+                onClick={() => editHandler(item)}
+              >
+                <Image
+                  src="/edit_FILL0_wght400_GRAD0_opsz24.svg"
+                  width={20}
+                  height={20}
+                  alt={item.id}
+                />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                type="button"
+                onClick={() => {
+                  dispatch({
+                    type: ActionTypes.REMOVE,
+                    payload: { id: item.id },
+                  });
+                }}
+              >
+                <Image
+                  src="/delete_FILL0_wght400_GRAD0_opsz24.svg"
+                  width={20}
+                  height={20}
+                  alt={item.id}
+                />
+              </Button>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 }
