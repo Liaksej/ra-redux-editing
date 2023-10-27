@@ -6,7 +6,8 @@ import { AppState, Product } from "@/redux/state";
 
 export function Form() {
   const dispatch = useDispatch();
-  const state = useSelector((state: AppState) => state.list);
+  const products = useSelector((state: AppState) => state.list);
+  const { editId } = useSelector((state: AppState) => state.list);
 
   const nameInput: MutableRefObject<HTMLInputElement | null> = useRef(null);
   const priceInput: MutableRefObject<HTMLInputElement | null> = useRef(null);
@@ -20,12 +21,13 @@ export function Form() {
     if (nameInput.current && priceInput.current) {
       nameInput.current.value = "";
       priceInput.current.value = "";
+      dispatch({ type: ActionTypes.FILTER, payload: "" });
     }
 
-    if (state.editId) {
+    if (products.editId) {
       return dispatch({
         type: ActionTypes.EDIT,
-        payload: { id: state.editId, name, price: Number(price) },
+        payload: { id: products.editId, name, price: Number(price) },
       });
     }
 
@@ -36,22 +38,22 @@ export function Form() {
   }
 
   useEffect(() => {
-    if (state.editId) {
+    if (products.editId) {
       if (nameInput.current && priceInput.current) {
-        nameInput.current.value = state.products.find(
-          (product: Product) => product.id === state.editId,
+        nameInput.current.value = products.products.find(
+          (product: Product) => product.id === products.editId,
         ).name;
-        priceInput.current.value = state.products.find(
-          (product: Product) => product.id === state.editId,
+        priceInput.current.value = products.products.find(
+          (product: Product) => product.id === products.editId,
         ).price;
       }
     }
-  }, [state.editId, state.products]);
+  }, [products.editId, products.products]);
 
   return (
     <form
       className={`w-full flex p-2 justify-between items-center gap-4 rounded-xl ${
-        Boolean(state.editId) && "bg-yellow-500"
+        Boolean(products.editId) && "bg-yellow-500"
       }`}
       onSubmit={(e) => submitHandler(e)}
     >
@@ -61,6 +63,10 @@ export function Form() {
         ref={nameInput}
         placeholder="Введите название"
         type="text"
+        onChange={(e) =>
+          Boolean(editId) ||
+          dispatch({ type: ActionTypes.FILTER, payload: e.target.value })
+        }
         required
       />
       <input
@@ -75,7 +81,7 @@ export function Form() {
         className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300"
         type="submit"
       >
-        {state.editId ? "Edit" : "Save"}
+        {products.editId ? "Edit" : "Save"}
       </button>
     </form>
   );

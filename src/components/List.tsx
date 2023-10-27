@@ -11,16 +11,17 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { productFilteredSelector } from "@/redux/appReducer";
 
 export function List() {
-  const listState = useSelector((state: AppState) => state.list);
+  const listState = useSelector(productFilteredSelector);
   const dispatch = useDispatch();
 
   function editHandler(item: Product) {
     return dispatch({ type: ActionTypes.EXTRACT_TO_FORM, payload: item.id });
   }
 
-  if (listState.products.length < 1) {
+  if (listState.length < 1) {
     return null;
   }
 
@@ -34,7 +35,7 @@ export function List() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {listState.products.map((item: Product) => (
+        {listState.map((item: Product) => (
           <TableRow key={item.id}>
             <TableCell className="w-2/3 overflow-auto">{item.name}</TableCell>
             <TableCell>{String(item.price)}</TableCell>

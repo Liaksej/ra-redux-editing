@@ -7,6 +7,7 @@ export interface Product {
 export interface ProductState {
   products: Product[] | [];
   editId: number | null;
+  filter: string;
 }
 
 export interface AppState {

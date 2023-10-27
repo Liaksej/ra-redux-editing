@@ -6,6 +6,7 @@ export enum ActionTypes {
   EDIT = "edit",
   EXTRACT_TO_FORM = "extractToForm",
   CLEAR_FORM = "clearForm",
+  FILTER = "filter",
 }
 
 export interface AddAction {
@@ -32,9 +33,15 @@ export interface ClearFormAction {
   type: ActionTypes.CLEAR_FORM;
 }
 
+interface FilterAction {
+  type: ActionTypes.FILTER;
+  payload: string;
+}
+
 export type Action =
   | AddAction
   | RemoveAction
   | EditAction
   | ExtractToFormAction
-  | ClearFormAction;
+  | ClearFormAction
+  | FilterAction;
