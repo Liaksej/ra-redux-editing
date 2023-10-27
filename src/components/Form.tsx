@@ -62,7 +62,7 @@ export function Form() {
           *Поиск
         </label>
         <input
-          className="w-fullpx-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+          className="w-fullpx-3 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           name="name"
           id="name"
           ref={nameInput}
