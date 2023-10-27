@@ -5,7 +5,6 @@ export enum ActionTypes {
   REMOVE = "remove",
   EDIT = "edit",
   EXTRACT_TO_FORM = "extractToForm",
-  CLEAR_FORM = "clearForm",
   FILTER = "filter",
 }
 
@@ -29,10 +28,6 @@ export interface ExtractToFormAction {
   payload: Pick<ProductState, "editId">;
 }
 
-export interface ClearFormAction {
-  type: ActionTypes.CLEAR_FORM;
-}
-
 interface FilterAction {
   type: ActionTypes.FILTER;
   payload: string;
@@ -43,5 +38,4 @@ export type Action =
   | RemoveAction
   | EditAction
   | ExtractToFormAction
-  | ClearFormAction
   | FilterAction;

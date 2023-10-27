@@ -19,7 +19,11 @@ export const productFilteredSelector = createSelector(
 );
 
 export function appReducer(
-  state: ProductState = { products: [], editId: null, filter: "" },
+  state: ProductState = {
+    products: [],
+    editId: null,
+    filter: "",
+  },
   action: Action,
 ) {
   switch (action.type) {
