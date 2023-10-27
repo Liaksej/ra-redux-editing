@@ -52,23 +52,29 @@ export function Form() {
 
   return (
     <form
-      className={`w-full flex p-2 justify-between items-center gap-4 rounded-xl ${
+      className={`w-full flex p-2 justify-between items-end gap-4 rounded-xl ${
         Boolean(products.editId) && "bg-yellow-500"
       }`}
       onSubmit={(e) => submitHandler(e)}
     >
-      <input
-        className="w-2/3 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-        name="name"
-        ref={nameInput}
-        placeholder="Введите название"
-        type="text"
-        onChange={(e) =>
-          Boolean(editId) ||
-          dispatch({ type: ActionTypes.FILTER, payload: e.target.value })
-        }
-        required
-      />
+      <div className="w-2/3 flex flex-col">
+        <label htmlFor="name" className="text-xs p-1">
+          *Поиск
+        </label>
+        <input
+          className="w-fullpx-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+          name="name"
+          id="name"
+          ref={nameInput}
+          placeholder="Введите название"
+          type="text"
+          onChange={(e) =>
+            Boolean(editId) ||
+            dispatch({ type: ActionTypes.FILTER, payload: e.target.value })
+          }
+          required
+        />
+      </div>
       <input
         className="w-1/4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
         name="price"

@@ -11,7 +11,7 @@ export const productFilteredSelector = createSelector(
   (products, filter) => {
     if (filter) {
       return products.filter((product: Product) =>
-        product.name.includes(filter),
+        product.name.toLowerCase().includes(filter.toLowerCase()),
       );
     }
     return products;
