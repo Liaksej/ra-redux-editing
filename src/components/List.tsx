@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { AppState, Product } from "@/redux/state";
+import { Product } from "@/redux/state";
 import { ActionTypes } from "@/redux/action";
 import {
   Table,

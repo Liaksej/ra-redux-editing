@@ -89,6 +89,18 @@ export function Form() {
       >
         {products.editId ? "Edit" : "Save"}
       </button>
+      <button
+        className="bg-gray-300 hover:bg-gray-400 text-white px-4 py-2 rounded-md transition duration-300"
+        type="button"
+        onClick={() => {
+          if (nameInput.current && priceInput.current) {
+            nameInput.current.value = "";
+            priceInput.current.value = "";
+          }
+        }}
+      >
+        Clear
+      </button>
     </form>
   );
 }
