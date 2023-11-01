@@ -22,6 +22,8 @@ export function Form() {
       nameInput.current.value = "";
       priceInput.current.value = "";
       dispatch({ type: ActionTypes.FILTER, payload: "" });
+    } else {
+      throw new Error(`There is no inputs`);
     }
 
     if (products.editId) {
@@ -46,6 +48,8 @@ export function Form() {
         priceInput.current.value = products.products.find(
           (product: Product) => product.id === products.editId,
         ).price;
+      } else {
+        throw new Error(`There is no inputs`);
       }
     }
   }, [products.editId, products.products]);
@@ -65,7 +69,6 @@ export function Form() {
           className="w-fullpx-3 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           name="name"
           id="name"
-          ref={nameInput}
           placeholder="Введите название"
           type="text"
           onChange={(e) =>
@@ -78,7 +81,6 @@ export function Form() {
       <input
         className="w-1/4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
         name="price"
-        ref={priceInput}
         placeholder="Введите цену"
         type="text"
         required
