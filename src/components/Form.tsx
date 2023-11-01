@@ -23,7 +23,7 @@ export function Form() {
       priceInput.current.value = "";
       dispatch({ type: ActionTypes.FILTER, payload: "" });
     } else {
-      throw new Error(`There is no inputs`);
+      throw new Error(`Something went wrong!`);
     }
 
     if (products.editId) {
@@ -49,7 +49,7 @@ export function Form() {
           (product: Product) => product.id === products.editId,
         ).price;
       } else {
-        throw new Error(`There is no inputs`);
+        throw new Error(`Something went wrong!`);
       }
     }
   }, [products.editId, products.products]);
@@ -71,6 +71,7 @@ export function Form() {
           id="name"
           placeholder="Введите название"
           type="text"
+          ref={nameInput}
           onChange={(e) =>
             Boolean(editId) ||
             dispatch({ type: ActionTypes.FILTER, payload: e.target.value })
@@ -83,6 +84,7 @@ export function Form() {
         name="price"
         placeholder="Введите цену"
         type="text"
+        ref={priceInput}
         required
       />
       <button
